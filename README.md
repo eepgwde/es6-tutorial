@@ -2,26 +2,46 @@
 
 Demonstrates using ES6 and transpile to ES5 using Babel.
 
+I've updated this to use the latest babel [7.3.0](https://babeljs.io/docs/en/usage)
+
 Also demonstrates simple JavaScript application.
 
-Start the tutorial [here](http://ccoenraets.github.io/es6-tutorial).
+The original is [here](http://ccoenraets.github.io/es6-tutorial).
 
-  344  npm init
-  345  npm install babel-cli babel-core --save-dev
+## Version issues
 
-Note: warning messages about using fsevents, not available for Linux only Darwin.
+I switched over to use [yarn](https://yarnpkg.com/en/)
 
-  346  npm install babel-preset-es2015 --save-dev
-  347  npm install http-server --save-dev
-  348  vi package.json 
+Added yarn (a Debian install). It's a better package manager, but doesn't run
 
-"scripts": {
-    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
-    "start": "http-server"
-},
-  
-  357  vi index.html
+    yarn init
 
-<script src="build/main.bundle.js"></script>
+    yarn add @babel/core @babel/preset-env @babel/preset-react --dev
+    yarn add @babel/cli --dev
 
-  358  npm start
+    yarn add http-server
+
+The babel-preset is now a configuration file
+
+    babel.config.js
+ 
+and the presets are in a .babelrc file
+
+You need to change how babel is invoked. 
+
+    npx babel src --out-dir build
+ 
+And this is the "scripts:babel" : babel src --out-dir build
+
+    npm run babel
+
+For webpack
+
+    yarn add babel-loader@8 --save-dev
+    yarn add webpack --save-dev
+ 
+And use the new webpack.config.js style. There is a generator for these files [here](https://generatewebpackconfig.netlify.com/)
+
+    npm run webpack
+    
+will do the right thing.
